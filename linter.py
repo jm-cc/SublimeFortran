@@ -26,9 +26,10 @@ class GfortranFixedForm(Linter):
     multiline = True
     regex = (
         # filename:line:col: is common for multiline and single line warnings
-        r'^[^:]*:(?P<line>\d+)[:.](?P<col>\d+):'
-        # Then we either have a space or (a newline, a newline, some source code, a newline, a col number, a newline)
-        r'(?:\s|$\r?\n^$\r?\n^.*$\r?\n^\s*\d$\r?\n)'
+        r'.*:(?P<line>\d+):(?P<col>\d+):'
+        # Then we either have a space or (a newline, a newline, some source code,
+        # a newline, a col number, a newline)
+        r'(?:(\s*.*\s*\d+\s*))'
         # Finally we have (Error|Warning): message to the end of the line
         r'(?:(?P<error>Error|Fatal\sError)|(?P<warning>Warning)): (?P<message>.*$)'
     )
@@ -45,10 +46,11 @@ class GfortranModern(Linter):
     multiline = True
     regex = (
         # filename:line:col: is common for multiline and single line warnings
-        r'^[^:]*:(?P<line>\d+)[:.](?P<col>\d+):'
-        # Then we either have a space or (a newline, a newline, some source code, a newline, a col number, a newline)
-        r'(?:\s|$\r?\n^$\r?\n^.*$\r?\n^\s*\d$\r?\n)'
+        r'.*:(?P<line>\d+):(?P<col>\d+):'
+        # Then we either have a space or (a newline, a newline, some source code,
+        # a newline, a col number, a newline)
+        r'(?:(\s*.*\s*\d+\s*))'
         # Finally we have (Error|Warning): message to the end of the line
-        r'(?:(?P<error>Error|Fatal\sError)|(?P<warning>Warning)): (?P<message>.*$)'
+        r'(?P<error>(Error|Fatal Error)|(?P<warning>Warning)): (?P<message>.*)'
     )
     tempfile_suffix = "f90"
