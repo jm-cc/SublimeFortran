@@ -1,0 +1,8 @@
+[
+    //Continuation line FORTRAN
+    {
+      "keys" : ["shift+enter"], "command": "run_macro_file",
+      "args" : {"file": "Packages/Fortran/macros/continuationFortranFixedForm.sublime-macro"},
+      "context" : [{ "key": "selector", "operator": "equal", "operand": "source.fixedform-fortran"}]
+    }
+]
