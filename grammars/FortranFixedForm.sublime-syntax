@@ -430,6 +430,13 @@ contexts:
 
   subroutine_parameter_list:
     - meta_content_scope: meta.subroutine-parameter-list.fortran
+    # Comments inside subroutine
+    - match: ^[Cc]
+      push: comment
+    - match: \!
+      push: comment
+    - match: ^\*
+      push: comment
     - match: \w+ # variable name in the parameter list
       scope: variable.parameter.fortran
     - match: \)
